@@ -6,6 +6,9 @@ class Auth extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+
+        //load Model
+        $this->load->model('LoginModel');
         
         if ($this->session->userdata('logged_in') == TRUE) 
         {
@@ -24,6 +27,7 @@ class Auth extends CI_Controller
 
     public function registeration_form()
     {
+        $this->load->model('LoginModel');
         $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
@@ -48,7 +52,6 @@ class Auth extends CI_Controller
         }
         else{
             $this->session->set_userdata('logged_in', TRUE);
-            $this->session->set_flashdata('success','You are now logged in');
             $this->LoginModel->login_user();
         }
     }
