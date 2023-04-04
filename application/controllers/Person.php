@@ -11,6 +11,10 @@ class Person extends CI_Controller
         //load Model
         $this->load->model('PersonModel', 'person');
         $this->check_auth();
+        if (!$this->session->userdata('logged_in') == TRUE) 
+        {
+            redirect('person');
+        }
 
 
     }
@@ -36,14 +40,38 @@ class Person extends CI_Controller
             $this->load->view('person/create');
             $this->load->view('person/footer');
     }
+    
     public function store()
     {
-
-        $this->form_validation->set_rules('fname', 'First Name', 'required');
-        $this->form_validation->set_rules('lname', 'Last Name', 'required');
-        $this->form_validation->set_rules('address', 'Last Name', 'required');
-        $this->form_validation->set_rules('department', 'Department', 'required');
-        $this->form_validation->set_rules('dob', 'Date of Birth', 'required');
+        $rules = array(
+            [
+                'field' => 'fname',
+                'label' => 'first name',
+                'rules' => 'trim|required'
+            ],
+            [
+                'field' => 'lname',
+                'label' => 'last name',
+                'rules' => 'trim|required'
+            ],
+            [
+                'field' => 'address',
+                'label' => 'address',
+                'rules' => 'trim|required'
+            ],
+            [
+                'field' => 'department',
+                'label' => 'department',
+                'rules' => 'trim|required'
+            ],
+            [
+                'field' => 'dob',
+                'label' => 'date of birth',
+                'rules' => 'trim|required|max_length[13]'
+            ],
+        );
+    
+        $this->form_validation->set_rules($rules);
 
         if($this->form_validation->run() == FALSE){
             $this->load->view('person/header');
@@ -57,6 +85,19 @@ class Person extends CI_Controller
             redirect('/');
         }
     }
+    // public function dob_check($str){
+    //     $dateofbirth = $this->input->post('dob');
+    //     $birth = (date('Y') - 17).'/'.date('01/01');
+    //     if(strtotime($dateofbirth) >=  strtotime($birth)){
+    //         echo "date of birth should be 18+";
+    //         return false;
+    //     }
+    //     else {
+    //         return true;
+    //     }
+    // }
+
+    
 
     public function edit($id)
     {

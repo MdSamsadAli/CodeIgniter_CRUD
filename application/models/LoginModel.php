@@ -27,6 +27,7 @@ class LoginModel extends CI_Model
                 'password' => $password
             );
             $this->db->insert('register', $data);
+            $this->session->set_flashdata('success','Congratulations, You have been registered.');
             redirect('/');
         }
     }

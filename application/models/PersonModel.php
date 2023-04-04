@@ -13,6 +13,7 @@ class PersonModel extends CI_Model
         return $query;
     }
 
+    
     public function store()
     {
         $data = [

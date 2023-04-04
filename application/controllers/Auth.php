@@ -8,16 +8,17 @@ class Auth extends CI_Controller
         parent::__construct();
 
         //load Model
-        $this->load->model('LoginModel');
+        // $this->load->model('LoginModel');
         
-        if ($this->session->userdata('logged_in') == TRUE) 
-        {
-            // session_destroy();
-            // redirect('person');
-        }
+        
+        
     }
     public function login()
     {
+        if ($this->session->userdata('logged_in') == TRUE) 
+        {
+            redirect('person');
+        }
         $this->load->view('auth/login');
     }
     public function register()
@@ -29,11 +30,11 @@ class Auth extends CI_Controller
     {
         $this->load->model('LoginModel');
         $this->form_validation->set_rules('username', 'Username', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
         $this->form_validation->set_rules('password', 'Password', 'required');
 
         if($this->form_validation->run() == FALSE){
-            // $this->session->set_flashdata('warning','Please Fill All Required Fields');
+            $this->session->set_flashdata('warning','Please fill all Required fields');
             redirect('auth/register');
         }
         else{
@@ -58,6 +59,12 @@ class Auth extends CI_Controller
     
     public function logout()
     {
+        // if ($this->session->userdata('logged_in') == TRUE) 
+        // {
+        //     session_destroy();
+        //     redirect('person');
+        // }
+
         $newdata = array(
             'email' => $this->input->post('email'),
             'password' => $this->input->post('password'),
