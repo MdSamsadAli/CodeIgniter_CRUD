@@ -41,6 +41,27 @@ class Person extends CI_Controller
             $this->load->view('person/footer');
     }
     
+    public function check_date_of_birth($date_of_birth)
+    {
+        $date = DateTime::createFromFormat('Y-m-d', $date_of_birth);
+
+        if (!$date) {
+            // Date of birth is not valid
+            $this->form_validation->set_message('check_date_of_birth', 'The %s field is not a valid date.');
+            return false;
+        }
+
+        $today = new DateTime();
+        $age = $today->diff($date)->y;
+
+        if ($age < 18) {
+            // Date of birth is less than 18 years old
+            $this->form_validation->set_message('check_date_of_birth', 'You must be at least 18 years old to register.');
+            return false;
+        }
+
+        return true;
+    }
     public function store()
     {
         $rules = array(
@@ -67,7 +88,7 @@ class Person extends CI_Controller
             [
                 'field' => 'dob',
                 'label' => 'date of birth',
-                'rules' => 'trim|required|max_length[13]'
+                'rules' => 'trim|required|max_length[13]|callback_check_date_of_birth'
             ],
         );
     
@@ -85,17 +106,7 @@ class Person extends CI_Controller
             redirect('/');
         }
     }
-    // public function dob_check($str){
-    //     $dateofbirth = $this->input->post('dob');
-    //     $birth = (date('Y') - 17).'/'.date('01/01');
-    //     if(strtotime($dateofbirth) >=  strtotime($birth)){
-    //         echo "date of birth should be 18+";
-    //         return false;
-    //     }
-    //     else {
-    //         return true;
-    //     }
-    // }
+    
 
     
 
