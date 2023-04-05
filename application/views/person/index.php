@@ -26,19 +26,20 @@ echo $data[0]['firstName'];
         <?php
         $id = 1;
         foreach ($data as $row) { ?>
-            <tr>
-                <th scope="row"><?php echo $id; ?></th>
-                <td><?php echo $row['firstName'] ?></td>
-                <td><?php echo $row['lastName'] ?></td>
-                <td><?php echo $row['gender'] ?></td>
-                <td><?php echo $row['address'] ?></td>
-                <td><?php echo $row['department'] ?></td>
-                <td><?php echo $row['dob'] ?></td>
-                <td>
-                    <a href="person/edit/<?php echo $row['id'] ?>" class="btn btn-sm btn-secondary">Edit</a>
-                    <a href='<?php base_url() ?>person/deletedata/<?php echo $row['id']; ?> ' class="btn btn-danger btn-sm">Delete</a>
-                </td>
-            </tr>
+        <tr>
+            <th scope="row"><?php echo $id; ?></th>
+            <td><?php echo $row['firstName'] ?></td>
+            <td><?php echo $row['lastName'] ?></td>
+            <td><?php echo $row['gender'] ?></td>
+            <td><?php echo $row['address'] ?></td>
+            <td><?php echo $row['department'] ?></td>
+            <td><?php echo $row['dob'] ?></td>
+            <td>
+                <a href="person/edit/<?php echo $row['id'] ?>" class="btn btn-sm btn-secondary">Edit</a>
+                <a href='<?php base_url() ?>person/deletedata/<?php echo $row['id']; ?> '
+                    class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
         <?php $id++;
         } ?>
     </tbody>

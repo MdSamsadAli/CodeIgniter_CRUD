@@ -10,29 +10,28 @@
         <input type="text" class="form-control" id="validationDefault01" name="fname"
             value="<?php echo set_value('fname'); ?>" />
         <?php if (form_error('fname')) {
-                            echo "<span style='color:red'>" . form_error('fname') . "</span>";
-                        }
-                        ?>
+            echo "<span style='color:red'>" . form_error('fname') . "</span>";
+        }
+        ?>
     </div>
     <div class="col-md-6">
         <label for="validationDefault02" class="form-label">Last Name</label>
         <input type="text" class="form-control" id="validationDefault02" name="lname"
             value="<?php echo set_value('lname'); ?>">
         <?php if (form_error('lname')) {
-                            echo "<span style='color:red'>" . form_error('lname') . "</span>";
-                        }
-                        ?>
+            echo "<span style='color:red'>" . form_error('lname') . "</span>";
+        }
+        ?>
     </div>
-
 
     <div class="col-md-6">
         <label for="validationDefault02" class="form-label">Address</label>
         <input type="text" class="form-control" id="validationDefault02" name="address"
             value="<?php echo set_value('address'); ?>" />
         <?php if (form_error('address')) {
-                            echo "<span style='color:red'>" . form_error('address') . "</span>";
-                        }
-                        ?>
+            echo "<span style='color:red'>" . form_error('address') . "</span>";
+        }
+        ?>
     </div>
 
     <div class="col-md-6">
@@ -43,9 +42,9 @@
             <option value="BIM">BIM</option>
         </select>
         <?php if (form_error('department')) {
-                            echo "<span style='color:red'>" . form_error('department') . "</span>";
-                        }
-                        ?>
+            echo "<span style='color:red'>" . form_error('department') . "</span>";
+        }
+        ?>
     </div>
 
     <div class="col-md-6">
